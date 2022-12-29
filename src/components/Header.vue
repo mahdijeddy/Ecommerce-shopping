@@ -3,8 +3,7 @@
       <Top/>
         <Tools/>
         <Navbar/>
-        <Baner/>
-        <Bottom/>
+        
 </template>
 
 <style lang="scss">
@@ -14,7 +13,6 @@
 import Top from './Header/Top.vue'
 import Tools from './Header/Tools.vue'
 import Navbar from './Header/Navbar.vue'
-import Baner from './Header/Baner.vue'
-import Bottom from './Header/Bottom.vue'
+
 
 </script>

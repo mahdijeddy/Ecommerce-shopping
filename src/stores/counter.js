@@ -3,12 +3,20 @@ import { defineStore } from 'pinia'
 
 export const useStore = defineStore('store', {
   state: () => ({
+
+    CartShow:false , 
+
+
+    // -------------------asjdh?
     Header:{
-      CatState:false
+      CatState:false,
     },
-    
+    state : false,
     Products:{
-      
+      Drops:{
+        Price1:false,
+        Size1:false,
+      },
      mostPopuler:{
       P1:{
         imgSrc:"src/asserts/images/p1.png",

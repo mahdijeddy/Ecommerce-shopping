@@ -1,32 +1,35 @@
-<template>
-    
-    <Header/>
+<template> 
+
     <Main/>
-    <Footer/>  
-    <button @click="GoTo" v-show="state" class="btn btn-danger GoUpBtn">UP</button>
+    
+    <button @click="GoTo" v-show="store.state" class="btn btn-outline-secondary  GoUpBtn fs-5"> 
+        <img src="@/asserts/icons/upIcon.png">
+    </button>
     
 </template>
 <script setup>
-import { ref } from 'vue';
-import Header from '../components/Header.vue';
+
 import Main from '../components/Main.vue';
-import Footer from '../components/Footer.vue';
-let state = ref(false)
+import {useStore} from '../stores/counter';
+
+const store = useStore()
+
 function GoTo(){
     scrollTo( 0 , 0)
 }
 
 window.addEventListener('scroll' , ()=>{
     if (scrollY > 200 ) {
-        state.value = true
+        store.state = true
     }else{
-        state.value = false
+        store.state = false
     }
 })
 
-
 </script>
+
 <style lang="scss">
+
 @font-face {
     font-family: "yekan";
     src: url("./asserts/font/Yekan.eot");
@@ -34,12 +37,16 @@ window.addEventListener('scroll' , ()=>{
     url("./asserts/font/Yekan.ttf") format("ttf"),
     
     }
+
 body{
     font-family: "yekan" !important;
 }
+
 .GoUpBtn{
     position: fixed;
     top: 80%;
     left: 5%;
+    
+    
 }
 </style>

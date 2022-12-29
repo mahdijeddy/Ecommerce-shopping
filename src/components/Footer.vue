@@ -28,10 +28,10 @@
                 <div> <a  class="text-decoration-none text-muted" href="#"> سفارشات من  </a> </div>
             </div>
             <div class="" dir="rtl">
-                <div class="d-flex justify-content-center align-items-center"><a class="text-decoration-none text-muted" href="#">فیسبوک <img src="../asserts/icons/Facebook.png" ></a></div>
-                <div class="d-flex justify-content-center align-items-center"><a class="text-decoration-none text-muted" href="#">توییتر <img src="../asserts/icons/Twitter.png" ></a></div>
-                <div class="d-flex justify-content-center align-items-center"><a class="text-decoration-none text-muted" href="#">اینستاگرام<img src="../asserts/icons/Instagram.png" ></a></div>
-                <div class="d-flex justify-content-center align-items-center"><a class="text-decoration-none text-muted" href="#">یوتیوب <img src="../asserts/icons/Youtube.png" ></a></div>
+                <div class="d-flex justify-content-center align-items-center"><a class="text-decoration-none text-muted" href="#">فیسبوک <img src="@/asserts/icons/Facebook.png" ></a></div>
+                <div class="d-flex justify-content-center align-items-center"><a class="text-decoration-none text-muted" href="#">توییتر <img src="@/asserts/icons/Twitter.png" ></a></div>
+                <div class="d-flex justify-content-center align-items-center"><a class="text-decoration-none text-muted" href="#">اینستاگرام<img src="@/asserts/icons/Instagram.png" ></a></div>
+                <div class="d-flex justify-content-center align-items-center"><a class="text-decoration-none text-muted" href="#">یوتیوب <img src="@/asserts/icons/Youtube.png" ></a></div>
             </div>
         
         </div>

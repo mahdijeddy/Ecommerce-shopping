@@ -13,7 +13,8 @@
     "firebase": "^9.15.0",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue3-star-ratings": "^1.1.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",

@@ -1,4 +1,7 @@
 <template>
+
+        <Baner/>
+        <Bottom/>
     <div class="mt-5">
         <div class="mt-5 d-flex justify-content-end me-4 fs-5">
             <p>            پرفروش ترینها
@@ -49,6 +52,8 @@
 
 </template>
 <script setup>
+import Baner from './Main/Baner.vue'
+import Bottom from './Main/Bottom.vue'
 import {useStore} from '../stores/counter';
 import { storeToRefs } from 'pinia';
 

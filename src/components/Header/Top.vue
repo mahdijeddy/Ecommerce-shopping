@@ -2,9 +2,9 @@
     <div class="HeaderTop">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-around align-items-center mx-5 mt-2">
-            <span><a class="mx-1" href="#"><img src="../../asserts/icons/Twitter1.png" alt="" srcset=""></a></span>
-            <span><a class="mx-1" href="#"><img src="../../asserts/icons/Instagram1.png" alt="" srcset=""></a></span>
-            <span><a class="mx-1" href="#"><img src="../../asserts/icons/Facebook1.png" alt="" srcset=""></a></span>
+            <span><a class="mx-1" href="#"><img src="@/asserts/icons/Twitter1.png" alt="" srcset=""></a></span>
+            <span><a class="mx-1" href="#"><img src="@/asserts/icons/Instagram1.png" alt="" srcset=""></a></span>
+            <span><a class="mx-1" href="#"><img src="@/asserts/icons/Facebook1.png" alt="" srcset=""></a></span>
         </div>
         <div class="d-flex justify-content-around align-items-center mx-5 mt-2">
            
