@@ -3,14 +3,14 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 
-
 const firebaseConfig = {
-  apiKey: "AIzaSyDQ7-5C6d-RN_UlRvVMUGVhm8yroUJYHVQ",
-  authDomain: "news-e5520.firebaseapp.com",
-  projectId: "news-e5520",
-  storageBucket: "news-e5520.appspot.com",
-  messagingSenderId: "286944804774",
-  appId: "1:286944804774:web:3f6f2a38d3d1a1a2615967"
+  apiKey: "AIzaSyA2VDL6ZXvmcj2WlwDiVA-oVlbloJP5rmo",
+  authDomain: "shoppingweb-ddb33.firebaseapp.com",
+  projectId: "shoppingweb-ddb33",
+  storageBucket: "shoppingweb-ddb33.appspot.com",
+  messagingSenderId: "402762393350",
+  appId: "1:402762393350:web:1dda94199a973ce4412087",
+  measurementId: "G-SJJLZ0417X"
 };
 
 const app = initializeApp(firebaseConfig);

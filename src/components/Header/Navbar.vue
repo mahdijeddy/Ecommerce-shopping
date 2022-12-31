@@ -1,55 +1,66 @@
 <template>
-   <!-- @click="store.Header.CatState = !store.Header.CatState"  -->
-<div class="HeaderNav">
-    <div class="sksks" @mouseenter="store.Header.CatState = !store.Header.CatState"><a href="#">دسته بندی کالاها</a></div>
-    <div><a href="#" @click="GoTo(800)">پرفروشترین ها </a></div>
-    <div><a href="#">تخفیفها و پیشنهادها </a></div>
-    <div><a href="#">شگفت انگیز ها  </a></div>
-    <div><a href="#"> سایر  </a></div>
+<div >
+     <div class="HeaderNav">
+        <div @click="CatState = !CatState"><a href="#">دسته بندی کالاها</a>
+        </div>
+        <div><a href="#" @click="GoTo(800)">پرفروشترین ها </a></div>
+        <div><a href="#">تخفیفها و پیشنهادها </a></div>
+        <div><a href="#">شگفت انگیز ها  </a></div>
+        <div><a href="#"> سایر  </a></div>
+
+    </div>
+        <!-- -------------------------category----options------ -->
+    <div dir="rtl">
+        <div id="categ" class="categoriesMenu" v-if="CatState" >
+            <div class="mainCategory">
+                <div tabindex="1" @click="subMenu = !subMenu , subMenu2=false">پوشاک مردانه</div>
+                <div tabindex="1" @click="subMenu2 = !subMenu2 ,subMenu=false">پوشاک زنانه</div>
+            
+            </div>
+         
+            <div class="subMenues">
+                <div v-if="subMenu">
+                    <div><a href="#">لباس مردانه</a></div>
+                    <div><a href="#">کفش مردانه</a></div>
+                    <div><a href="#">ساعت مردانه</a></div>
+                    <div><a href="#">کیف مردانه</a></div>
+                    <div><a href="#">کمربند مردانه</a></div>
+                    <div><a href="#">عینک مردانه</a></div>
+                </div>
+                <div v-if="subMenu2">
+                    <div><a href="#">لباس زنانه</a></div>
+                    <div><a href="#">کفش زنانه</a></div>
+                    <div><a href="#">ساعت زنانه</a></div>
+                    <div><a href="#">کیف زنانه</a></div>
+                    <div><a href="#">کمربند زنانه</a></div>
+                    <div><a href="#">عینک زنانه</a></div>
+                </div>
+            </div>
     
+        </div>
+
+    </div>
+ 
+    
+   
 </div>  
 
-<!-- -------------------------category----options------ -->
-<div class="op" v-if="store.Header.CatState" @mouseenter="store.Header.CatState = true" @mouseleave="store.Header.CatState = false">
-  <div>
-    <div><a href="#">هدفون</a></div>
-    <div><a href="#">هارد و فلش و اس اس دی</a></div>
-    <div><a href="#">لبتاپ</a></div>
-    <div><a href="#">کامپیوتر</a></div>
-    <div><a href="#">کنسول بازی</a></div>
-    <div><a href="#">تبلت</a></div>
-    <div><a href="#">دوربین</a></div>
-    <div><a href="#">لوازم جانبی</a></div>
-  </div>
-  <div>
-    <div><a href="#">سویشرت</a></div>
-    <div><a href="#">شلوار</a></div>
-    <div><a href="#">لباس زیر</a></div>
-    <div><a href="#">کفش روزمره</a></div>
-    <div><a href="#">کفش رسمی</a></div>
-    <div><a href="#">ساعت</a></div>
-    <div><a href="#">کیف</a></div>
-    <div><a href="#">پالتو</a></div>
-    <div><a href="#">بارانی</a></div>
-    <div><a href="#">ژاکت</a></div>
-    <div><a href="#">دستبند</a></div>
-    <div><a href="#">گردنبند</a></div>
-    <div><a href="#">کوله پشتی</a></div>
-    
-
-  </div>
-</div>
 
 
 
 </template>
 <script setup>
-import {useStore} from '../../stores/counter';
-import { storeToRefs } from 'pinia';
+import {ref} from 'vue'
+let CatState = ref(false)
+let subMenu = ref(false)
+let subMenu2 = ref(false)
+window.addEventListener('mouseup', function(e) {
+    var categ = document.getElementById('categ');
+    if (!categ.contains(e.target)) {
+        CatState.value=false
+    }
+});
 
-const store = useStore()
-
-const { header} = storeToRefs(store)
 function GoTo(x){
     scrollTo( 0 , x)
 }
@@ -58,39 +69,69 @@ function GoTo(x){
 </script>
 <style lang="scss" scoped>
 
-.op{
+.categoriesMenu{
     display: flex;
     position: absolute;
-    right: 17%;
-    top: 30%;
-    margin-top: 1rem;
-    padding: 2rem;
-    text-align: right;
-    background-color: rgba(211, 211, 211, 0.713);
+    background-color: rgb(0, 119, 237);
     flex-direction: row-reverse;
-    width: 60rem;
+    text-align: right;
+    width: 26rem;
     z-index: 3;
     border-radius: 3px;
-    
-    div{
-        margin: 5px;
-        width:8rem;
+    flex-direction: column;
+    box-shadow: 0px 0px 6px 1px rgb(89, 89, 89);
+    .subMenues{
         display: flex;
-
-        flex-direction: column;
-        a{
+        
+        div{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            :hover{
+                    background-color: rgb(56, 138, 252);
+                    
+                }
+            div{
+                padding: 1rem;
+               padding-right: 3rem;
+                a{
+                text-decoration: none;
+                color: rgb(255, 255, 255);
+            }}
+        }
+    }
+    .mainCategory{
+        font-size: 1.1rem;
+        width: 100%;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        position: relative;
+        top: 0%;
+        
+        div{
+            padding-right: 2rem;
+            margin-top: 1rem;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
             text-decoration: none;
-            color: rgb(54, 54, 54);
-            padding: 0.2rem;
-            margin-right: 2rem;
-            border-radius: 6px;
+                line-height: 3rem;
+                color: rgb(255, 255, 255);
             &:hover{
-                background-color: rgb(242, 242, 242);
+                background-color: rgb(18, 135, 252);
             }
+            
+            &:focus {
+                    background-color: rgb(0, 61, 107);
+                }
+          
         }
 
     }
 }
+
 .HeaderNav{
     height: 54px;
     display: flex;
@@ -113,7 +154,3 @@ function GoTo(x){
 
 </style>
 
-<script setup>
-
-
-</script>

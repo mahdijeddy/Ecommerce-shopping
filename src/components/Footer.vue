@@ -39,7 +39,7 @@
 </template>
 <style lang="scss" scoped>
 .Footer{
-    margin-top: 20rem;
+    margin-top: 10rem;
     width: 100%;
     height: 345px;
     background-color :#F6F6F6;

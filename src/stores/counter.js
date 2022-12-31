@@ -1,17 +1,25 @@
-import { ref, computed } from 'vue'
+import { ref, computed ,reactive} from 'vue'
 import { defineStore } from 'pinia'
+// ___________
+import db from '../firebase/firebase'
+import {collection , getDocs } from 'firebase/firestore'
+
+
+  
+ 
+    
+    
+   
+
+// ?????????????????????
 
 export const useStore = defineStore('store', {
   state: () => ({
 
     CartShow:false , 
     ProfileTab:false,
+    data:[],
 
-
-    // -------------------asjdh?
-    Header:{
-      CatState:false,
-    },
     state : false,
     Products:{
       Drops:{
@@ -74,6 +82,25 @@ export const useStore = defineStore('store', {
    }),
  
   actions: {
-    
+      getData(){
+      
+    const colRef = collection(db , "products")
+
+      getDocs(colRef)
+          .then( snapshot => {
+              
+            snapshot.docs.forEach(e => {
+              console.log(e.data());
+              
+                        this.data.push({...e.data() })
+             
+            });
+              
+
+          })
+          .catch(err => {
+              console.log(err.massage)
+          })
+    }
   },
 })

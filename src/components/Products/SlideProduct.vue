@@ -1,10 +1,11 @@
 <template>
    
     <div class="col-3">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;z-index: -5" >
         <div class="card-body Side " >
             
-            <div >
+   
+            <div>
                 <p class="text-muted fs-4" @click="store.Products.Drops.Price1=!store.Products.Drops.Price1">
                     قیمت <img class="mx-3" style="width: 20px;" src="@/asserts/icons/dowmIcon.png">
                     </p>

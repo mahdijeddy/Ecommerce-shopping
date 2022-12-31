@@ -6,7 +6,8 @@
         <div class="mt-5 d-flex justify-content-end me-4 fs-5">
             <p>            پرفروش ترینها
         </p>
-        </div>
+    </div>
+    <hr>
         <div class="row">
             <div class="col-3 mt-3" v-for="P in store.Products.mostPopuler" :key="P">
                 <a class="text-decoration-none text-dark" href="#">
@@ -30,6 +31,7 @@
         <div class="mt-5 d-flex justify-content-end me-4 fs-5">
             <p>      محصولات جدید  </p>
         </div>
+        <hr>
         <div class="row">
             <div class="col-3 mt-3" v-for="P in store.Products.newArrived" :key="P">
                 <a class="text-decoration-none text-dark" href="#">

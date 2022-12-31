@@ -1,13 +1,48 @@
 <template>
     <div class="col-9">
        <div class="d-flex justify-content-center align-items-center">
-        <div class="card cardA">
+        <div class="card cardA" >
+            <!-- v-for="item in store.data" :key="item.id" -->
                 <div class="card-image">
                     <img src="../../asserts/images/p1.png" alt="" srcset="">
                 </div>
                 <div class="card-body BD">
                            <div class="ms-5 ps-3 fs-4">
-                            <p>کاپشن</p>
+                            <p>کاپشن
+                                <!-- {{ store.data.title }} -->
+                            </p>
+                           </div>
+                            <div class="ms-5 ps-3 my-3" >
+                                
+                                <img src="../../asserts/icons/Rating.png" alt="" srcset="">
+                            </div>
+                    
+                            <div>
+                                <p>قهوه ای</p>
+                                <p>رنگ</p>
+                            </div>
+                            <div>
+                                <p>کتان</p>
+                                <p>جنس</p>
+                            </div>
+                            <div>
+                                <p>41 43 40 45</p>
+                                <p>اندازه های موجود</p>
+                            </div>
+                   
+                </div>
+               
+        </div>
+        <div class="card cardA" >
+            <!-- v-for="item in store.data" :key="item.id" -->
+                <div class="card-image">
+                    <img src="../../asserts/images/p1.png" alt="" srcset="">
+                </div>
+                <div class="card-body BD">
+                           <div class="ms-5 ps-3 fs-4">
+                            <p>کاپشن
+                                <!-- {{ store.data.title }} -->
+                            </p>
                            </div>
                             <div class="ms-5 ps-3 my-3" >
                                 
@@ -53,6 +88,16 @@
        </div>
     </div>
 </template>
+<script setup>
+// import {useStore} from '@/stores/counter';
+// import { onMounted } from 'vue';
+// const store = useStore()
+// onMounted(() => {
+//     store.getData()
+// })
+ 
+</script>
+
 <style scoped lang="scss">
 .BD{
 
@@ -78,8 +123,7 @@
     border-top-right-radius: 0px;  
     border-bottom-right-radius:0px; 
     display: flex;
-    flex-direction: row;
-    
+    flex-direction: row;z-index: -5;
      
 }
 .card-Wish{
