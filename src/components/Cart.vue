@@ -5,9 +5,9 @@
             <div class="cnt1">
                 <div class="left d-flex justify-content-between ">
                     <div>
-                        <p class="text-muted">محصولات</p>
-                        <div class="d-flex ">
-                            <img style="width: 80px;" src="../asserts/images/p1.png" alt="">
+                        
+                        <div class="d-flex mt-2">
+                            <img style="width: 60px;height: 60px;" src="../asserts/images/p1.png" alt="">
                             <div class="mx-2">
                                 <p>title</p>
                             <p class="text-muted">details 
@@ -18,13 +18,13 @@
                     </div>
                     <div >
                         <p class="text-muted">مقدار</p>
-                        <div class="text-center mt-5">
+                        <div class="text-center">
                             <p>1</p>
                         </div>
                     </div>
                     <div>
                         <p class="text-muted">قیمت </p>
-                        <div class="mt-4">
+                        <div class="">
                             <p>14000T </p>
                             <p class="pri">14000T هر واحد </p>
                         </div>
@@ -36,9 +36,9 @@
                 </div>
                 <div class="left d-flex justify-content-between ">
                     <div>
-                        <p class="text-muted">محصولات</p>
-                        <div class="d-flex ">
-                            <img style="width: 80px;" src="../asserts/images/p1.png" alt="">
+                        
+                        <div class="d-flex mt-2">
+                            <img style="width: 60px;height: 60px;" src="../asserts/images/p1.png" alt="">
                             <div class="mx-2">
                                 <p>title</p>
                             <p class="text-muted">details 
@@ -49,13 +49,13 @@
                     </div>
                     <div >
                         <p class="text-muted">مقدار</p>
-                        <div class="text-center mt-5">
+                        <div class="text-center">
                             <p>1</p>
                         </div>
                     </div>
                     <div>
                         <p class="text-muted">قیمت </p>
-                        <div class="mt-4">
+                        <div class="">
                             <p>14000T </p>
                             <p class="pri">14000T هر واحد </p>
                         </div>
@@ -67,9 +67,9 @@
                 </div>
                 <div class="left d-flex justify-content-between ">
                     <div>
-                        <p class="text-muted">محصولات</p>
-                        <div class="d-flex ">
-                            <img style="width: 80px;" src="../asserts/images/p1.png" alt="">
+                        
+                        <div class="d-flex mt-2">
+                            <img style="width: 60px;height: 60px;" src="../asserts/images/p1.png" alt="">
                             <div class="mx-2">
                                 <p>title</p>
                             <p class="text-muted">details 
@@ -80,13 +80,13 @@
                     </div>
                     <div >
                         <p class="text-muted">مقدار</p>
-                        <div class="text-center mt-5">
+                        <div class="text-center">
                             <p>1</p>
                         </div>
                     </div>
                     <div>
                         <p class="text-muted">قیمت </p>
-                        <div class="mt-4">
+                        <div class="">
                             <p>14000T </p>
                             <p class="pri">14000T هر واحد </p>
                         </div>
@@ -98,9 +98,9 @@
                 </div>
                 <div class="left d-flex justify-content-between ">
                     <div>
-                        <p class="text-muted">محصولات</p>
-                        <div class="d-flex ">
-                            <img style="width: 80px;" src="../asserts/images/p1.png" alt="">
+                        
+                        <div class="d-flex mt-2">
+                            <img style="width: 60px;height: 60px;" src="../asserts/images/p1.png" alt="">
                             <div class="mx-2">
                                 <p>title</p>
                             <p class="text-muted">details 
@@ -111,13 +111,13 @@
                     </div>
                     <div >
                         <p class="text-muted">مقدار</p>
-                        <div class="text-center mt-5">
+                        <div class="text-center">
                             <p>1</p>
                         </div>
                     </div>
                     <div>
                         <p class="text-muted">قیمت </p>
-                        <div class="mt-4">
+                        <div class="">
                             <p>14000T </p>
                             <p class="pri">14000T هر واحد </p>
                         </div>
@@ -127,6 +127,7 @@
                         <button class="btn btn-light">حذف از سبد</button>
                     </div>
                 </div>
+                
             </div>
             <div class="cnt2">
                 <div class="right p-3 ">
@@ -166,12 +167,12 @@
 .left{
     padding: 1rem;
     width: 100%;
-    height: 150px;
+    height: 100px;
     margin: 29px 5px 10px 5px;
     background-color: rgb(243, 243, 243);
     border-radius: 5px;
     img{
-        border-radius: 20px;
+        border-radius: 8px;
         margin-right: 5px;
     }
 }
@@ -182,6 +183,7 @@
 }
 .pri{
     font-size: 10px;
+    margin-top: -15px;
    
     color: rgb(190, 190, 190);
 }
@@ -194,4 +196,5 @@
         
 
 }
+
 </style>

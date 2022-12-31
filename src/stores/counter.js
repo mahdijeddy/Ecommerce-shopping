@@ -5,6 +5,7 @@ export const useStore = defineStore('store', {
   state: () => ({
 
     CartShow:false , 
+    ProfileTab:false,
 
 
     // -------------------asjdh?

@@ -10,7 +10,7 @@
             </div>
             <div class="d-flex align-items-center  p-2 justify-content-center">
                 
-                <vue3-star-ratings style="z-index: -1 !important;" v-model="rating" />
+                <vue3-star-ratings  v-model="rating" />
                 <p class="m-2">132reviews</p>
                 <p class="m-2">150 سفارش</p>
                 
@@ -68,12 +68,12 @@
             </div>
             <div class="d-flex align-items-center p-2 ">
                 <p class="mt-4">انتخاب سایز</p>
-                <label class="mx-3" for="checkbox">40</label>
-                <input type="checkbox" name="checkbox" >
-                <label class="mx-3" for="checkbox41">41</label>
-                <input type="checkbox" name="checkbox41" >
-                <label class="mx-3" for="checkbox41">42</label>
-                <input type="checkbox" name="checkbox42" >
+                <label class="mx-3" for="radio">40</label>
+                <input type="radio" name="radio" >
+                <label class="mx-3" for="radio">41</label>
+                <input type="radio" name="radio" >
+                <label class="mx-3" for="radio">42</label>
+                <input type="radio" name="radio" >
             </div>
             <div>
                 <button class="btn btn-primary ">خرید</button>

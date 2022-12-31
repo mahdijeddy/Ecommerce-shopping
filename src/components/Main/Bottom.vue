@@ -14,5 +14,6 @@ div{
     font-size: 2rem;
     font-weight: 700;
     color: #017bff;
+    z-index: -1;
 } 
 </style>
