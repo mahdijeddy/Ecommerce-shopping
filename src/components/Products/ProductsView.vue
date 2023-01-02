@@ -1,15 +1,15 @@
 <template>
-    <div class="col-9">
-       <div class="d-flex justify-content-center align-items-center">
-        <div class="card cardA" >
-            <!-- v-for="item in store.data" :key="item.id" -->
+    <div class="col-6" style="cursor: pointer;" >
+        <div class=" cardA my-3" @click="jf(item)" v-for="item in store.data" :key="item.id" >
+           
                 <div class="card-image">
-                    <img src="../../asserts/images/p1.png" alt="" srcset="">
+                    <img :src="item.img" style="width: 80px;" >
                 </div>
                 <div class="card-body BD">
                            <div class="ms-5 ps-3 fs-4">
-                            <p>کاپشن
-                                <!-- {{ store.data.title }} -->
+                            <p>
+                                
+                                {{ item.title }}
                             </p>
                            </div>
                             <div class="ms-5 ps-3 my-3" >
@@ -18,53 +18,23 @@
                             </div>
                     
                             <div>
-                                <p>قهوه ای</p>
+                                <p> {{item.color}}</p>
                                 <p>رنگ</p>
                             </div>
                             <div>
-                                <p>کتان</p>
+                                <p>{{item.material}}</p>
                                 <p>جنس</p>
                             </div>
                             <div>
-                                <p>41 43 40 45</p>
+                                <p class="btn" v-for="i in 3" >{{ item.sizes[i] }}</p>
                                 <p>اندازه های موجود</p>
                             </div>
                    
                 </div>
                
         </div>
-        <div class="card cardA" >
-            <!-- v-for="item in store.data" :key="item.id" -->
-                <div class="card-image">
-                    <img src="../../asserts/images/p1.png" alt="" srcset="">
-                </div>
-                <div class="card-body BD">
-                           <div class="ms-5 ps-3 fs-4">
-                            <p>کاپشن
-                                <!-- {{ store.data.title }} -->
-                            </p>
-                           </div>
-                            <div class="ms-5 ps-3 my-3" >
-                                
-                                <img src="../../asserts/icons/Rating.png" alt="" srcset="">
-                            </div>
-                    
-                            <div>
-                                <p>قهوه ای</p>
-                                <p>رنگ</p>
-                            </div>
-                            <div>
-                                <p>کتان</p>
-                                <p>جنس</p>
-                            </div>
-                            <div>
-                                <p>41 43 40 45</p>
-                                <p>اندازه های موجود</p>
-                            </div>
-                   
-                </div>
-               
-        </div>
+    </div>
+    <div class="col-3">
         <div class="card cardB">
             <div>
                 
@@ -85,21 +55,47 @@
               
             </div>
         </div>
-       </div>
     </div>
+    
 </template>
 <script setup>
-// import {useStore} from '@/stores/counter';
-// import { onMounted } from 'vue';
-// const store = useStore()
-// onMounted(() => {
-//     store.getData()
-// })
- 
+import {useStore} from '@/stores/counter';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter()
+
+
+const store = useStore()
+onMounted(() => {
+    if (store.data =='') {
+        
+        store.getData()
+    }else{
+        return
+    }
+})
+
+ function jf(x){
+    console.log(x);
+    store.singleProduct = {
+        title: x.title,
+        cat: x.cat,
+        id: x.id,
+        material: x.material,
+        color: x.color,
+        sizes: x.sizes,
+        price: x.price,
+        img: x.img
+    }
+   
+   router.push('SingleProduct')
+ }
+ let image = store.data.img
 </script>
 
 <style scoped lang="scss">
 .BD{
+    
 
     :nth-child(3){
         display: flex;
@@ -118,8 +114,9 @@
     }
 }
 .cardA{
-    width: 70%;
-    height:  240px;
+    width: 100%;
+    cursor: pointer;
+    height:  250px;
     border-top-right-radius: 0px;  
     border-bottom-right-radius:0px; 
     display: flex;
@@ -149,7 +146,7 @@
 }
 
 .cardB{
-    width: 30%;
+    width: 100%;
     height: 240px;
     border-top-left-radius: 0px;  
     border-bottom-left-radius:0px; 

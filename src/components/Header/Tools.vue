@@ -11,9 +11,9 @@
                 </form>
             </div>
             <div class="d-flex p-2 ms-4">
-                 <div><a @click=" store.CartShow = !store.CartShow" href="#"><img class="mx-1" src="@/asserts/icons/Large.png" alt="" srcset=""></a></div>
-                 <div><a href="#"><img class="mx-1" src="@/asserts/icons/wish.png" alt="" srcset=""></a></div>
-                 <div><router-link  to="/Account" @click=" store.ProfileTab = !store.ProfileTab">  <img class="mx-1" src="@/asserts/icons/Icon.png" alt="" srcset=""></router-link></div>
+                 <div><button @click=" store.CartShow = !store.CartShow" class="btn"><img class="mx-1" src="@/asserts/icons/Large.png" alt="" srcset=""></button></div>
+                 <div><button class="btn"><img class="mx-1" src="@/asserts/icons/wish.png" alt="" srcset=""></button></div>
+                 <div><button class="btn"><router-link  to="/Account/createAccount" >  <img class="mx-1" src="@/asserts/icons/Icon.png" alt="" srcset=""></router-link></button></div>
             </div>
         </div>
         <div v-if="store.CartShow">

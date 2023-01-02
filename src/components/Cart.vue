@@ -3,15 +3,14 @@
         <div class="col-10 card">
             <div class="top">
             <div class="cnt1">
-                <div class="left d-flex justify-content-between ">
+                <div class="left d-flex justify-content-between " v-for="(item, index) in store.addedToCart" :key="index">
                     <div>
                         
                         <div class="d-flex mt-2">
-                            <img style="width: 60px;height: 60px;" src="../asserts/images/p1.png" alt="">
+                            <img style="width: 60px;height: 60px;" :src="item.img" alt="">
                             <div class="mx-2">
-                                <p>title</p>
-                            <p class="text-muted">details 
-                                brand
+                                <p>{{ item.title }}</p>
+                            <p class="text-muted">{{ item.title }}
                             </p>
                             </div>
                         </div>
@@ -25,106 +24,13 @@
                     <div>
                         <p class="text-muted">قیمت </p>
                         <div class="">
-                            <p>14000T </p>
-                            <p class="pri">14000T هر واحد </p>
+                            <p>{{ item.price }} </p>
+                            <p class="pri">{{ item.price }}</p>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                     <img src="../asserts/icons/wish.png" style="width: 40px; cursor: pointer;">
-                        <button class="btn btn-light">حذف از سبد</button>
-                    </div>
-                </div>
-                <div class="left d-flex justify-content-between ">
-                    <div>
-                        
-                        <div class="d-flex mt-2">
-                            <img style="width: 60px;height: 60px;" src="../asserts/images/p1.png" alt="">
-                            <div class="mx-2">
-                                <p>title</p>
-                            <p class="text-muted">details 
-                                brand
-                            </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div >
-                        <p class="text-muted">مقدار</p>
-                        <div class="text-center">
-                            <p>1</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-muted">قیمت </p>
-                        <div class="">
-                            <p>14000T </p>
-                            <p class="pri">14000T هر واحد </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                    <img src="../asserts/icons/wish.png" style="width: 40px; cursor: pointer;">
-                        <button class="btn btn-light">حذف از سبد</button>
-                    </div>
-                </div>
-                <div class="left d-flex justify-content-between ">
-                    <div>
-                        
-                        <div class="d-flex mt-2">
-                            <img style="width: 60px;height: 60px;" src="../asserts/images/p1.png" alt="">
-                            <div class="mx-2">
-                                <p>title</p>
-                            <p class="text-muted">details 
-                                brand
-                            </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div >
-                        <p class="text-muted">مقدار</p>
-                        <div class="text-center">
-                            <p>1</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-muted">قیمت </p>
-                        <div class="">
-                            <p>14000T </p>
-                            <p class="pri">14000T هر واحد </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                    <img src="../asserts/icons/wish.png" style="width: 40px; cursor: pointer;">
-                        <button class="btn btn-light">حذف از سبد</button>
-                    </div>
-                </div>
-                <div class="left d-flex justify-content-between ">
-                    <div>
-                        
-                        <div class="d-flex mt-2">
-                            <img style="width: 60px;height: 60px;" src="../asserts/images/p1.png" alt="">
-                            <div class="mx-2">
-                                <p>title</p>
-                            <p class="text-muted">details 
-                                brand
-                            </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div >
-                        <p class="text-muted">مقدار</p>
-                        <div class="text-center">
-                            <p>1</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-muted">قیمت </p>
-                        <div class="">
-                            <p>14000T </p>
-                            <p class="pri">14000T هر واحد </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                    <img src="../asserts/icons/wish.png" style="width: 40px; cursor: pointer;">
-                        <button class="btn btn-light">حذف از سبد</button>
+                        <button @click="deletFromCart(item.id)" class="btn btn-light">حذف از سبد</button>
                     </div>
                 </div>
                 
@@ -133,16 +39,16 @@
                 <div class="right p-3 ">
                 <div class="d-flex justify-content-around p-4">
                     <p class="text-muted">مجموع پرداختی :</p>
-                    <p> 150000T</p>
+                    <p>  {{store.totalCartPrice}}  تومان</p>
                 </div>
                 <div class="d-flex justify-content-around p-4">
                     <p class="text-muted">تخفیف</p>
-                    <p class="text-danger"> -1000T</p>
+                    <p class="text-danger">  -0  تومان</p>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-around p-4">
                     <p >پرداختی نهایی</p>
-                    <p class="text-success">50000T</p>
+                    <p class="text-success"> {{store.totalCartPrice}} تومان </p>
                 </div>
                 <div class="d-flex justify-content-around my-4">
                     <button class="btn btn-outline-primary w-75"> پرداخت </button>
@@ -155,6 +61,36 @@
         </div>
     </div>
 </template>
+<script setup>
+import { map } from '@firebase/util';
+import { useStore } from '../stores/counter';
+
+const store = useStore()
+
+// ---------------delet items from cart ------------------
+function deletFromCart(id){
+    store.addedToCart.splice(store.addedToCart.findIndex(v => v.id === id), 1);
+    totalPriceProcess()
+}
+
+// ------------------process the costs ---------------------
+function totalPriceProcess(){
+    store.totalCartPrice=0
+    store.addedToCart.map((i)=>{
+        let pr = i.price;
+       let p = pr.slice(0 ,-1)
+     
+       store.totalCartPrice+=Number(p)
+       
+       
+       
+    })
+}
+totalPriceProcess()
+
+
+
+</script>
 <style lang="scss" scoped>
 .cart{
     position: absolute;

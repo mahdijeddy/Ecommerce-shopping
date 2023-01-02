@@ -1,11 +1,17 @@
 import { ref, computed ,reactive} from 'vue'
 import { defineStore } from 'pinia'
-// ___________
-import db from '../firebase/firebase'
+// ___________firebase________
 import {collection , getDocs } from 'firebase/firestore'
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, signOut,
+  onAuthStateChanged
+} from 'firebase/auth'
+import { getStorage } from "firebase/storage";
 
-
-  
+import db from '../firebase/firebase'
+const auth = getAuth()
  
     
     
@@ -16,9 +22,19 @@ import {collection , getDocs } from 'firebase/firestore'
 export const useStore = defineStore('store', {
   state: () => ({
 
+    signUpEmail:'',
+    signUpPassword:'',
     CartShow:false , 
     ProfileTab:false,
     data:[],
+    singleProduct:{},
+    addedToCart:[],
+    totalCartPrice:0,
+    isLgged:false,
+    isAuthenticated:false,
+    hasAccount:true,
+    isSignedUp:false,
+     profileInfo :{},
 
     state : false,
     Products:{
@@ -85,7 +101,7 @@ export const useStore = defineStore('store', {
       getData(){
       
     const colRef = collection(db , "products")
-
+        // ---------------------fetching data from firebase 
       getDocs(colRef)
           .then( snapshot => {
               
@@ -93,6 +109,9 @@ export const useStore = defineStore('store', {
               console.log(e.data());
               
                         this.data.push({...e.data() })
+                       
+                        
+                       
              
             });
               
@@ -101,6 +120,80 @@ export const useStore = defineStore('store', {
           .catch(err => {
               console.log(err.massage)
           })
-    }
+    },
+
+    // -----------------alert function on website 
+   alert(msg , cls){
+    const div = document.createElement('div')
+    div.innerText=msg
+    div.className = `alert ${cls}`
+    div.style.position='absolute'
+    div.style.top='4rem'
+    div.style.right='4rem'
+    document.body.appendChild(div)
+    setTimeout(() => {
+      div.remove()
+    }, 1000);
+ 
   },
+  // ----------------create account on firebase-----------
+
+ signUp(){
+  
+  createUserWithEmailAndPassword(auth, this.signUpEmail, this.signUpPassword)
+    .then(e => {
+      console.log('user created:', e.user)
+      this.alert(' ایجاد حساب موفقیت امیز ' , 'alert-success')
+      this.isSignedUp = true
+    })
+    .catch(err => {
+      console.log(err.message)
+      if (err.message == 'Firebase: Error (auth/email-already-in-use).') {
+        this.alert(' ایمیل از قبل وجود دارد ' , 'alert-danger')
+
+      }else{
+
+        this.alert('ایمیل نا معتبر' , 'alert-danger')
+      }
+    })
+
+},
+
+// -------------------------signOut 
+signOut(){
+  signOut(auth)
+    .then(() => {
+      console.log('user signed out')
+      this.alert(' خروج موفقیت امیز ' , 'alert-success')
+      this.isSignedUp = false
+    })
+    .catch(err => {
+      this.alert('خطایی رخ داده است' , 'alert-danger')
+    })
+},
+// --------------------------signIn 
+signIn(){
+  signInWithEmailAndPassword(auth, this.signUpEmail, this.signUpPassword)
+.then(e => {
+  this.alert(' ورود موفقیت امیز ' , 'alert-success')
+  this.isSignedUp = true
+})
+.catch(err => {
+  this.alert('خطایی رخ داده است' , 'alert-danger')
+})
+},
+// ------------------------------storage 
+
+Storage(){
+  const storage = getStorage(firebaseApp, "gs://my-custom-bucket");
+}
+
+///////////////////////////////////////
+//////////////////////////////////////
+// ---------------end actions 
+/////////////////////////////////
+///////////////////////////////////
+  }
+
+  
 })

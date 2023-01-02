@@ -1,9 +1,6 @@
 <template>
   <div class="Container" >
-    <button @click="asdasd" class="btn btn-danger">getData</button>
-    <div v-for="item in store.data" :key="item.id">
-        {{ item.id }}
-    </div>
+    
     
 
     <div v-if="!store.ProfileTab">

@@ -55,7 +55,7 @@ let CatState = ref(false)
 let subMenu = ref(false)
 let subMenu2 = ref(false)
 window.addEventListener('mouseup', function(e) {
-    var categ = document.getElementById('categ');
+    let categ = document.getElementById('categ');
     if (!categ.contains(e.target)) {
         CatState.value=false
     }

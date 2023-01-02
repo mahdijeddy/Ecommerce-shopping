@@ -1,46 +1,100 @@
 <template>
-<div class="createForm " >
+  <div class="createForm" >
   <div class="fs-4 text-center">
-      ایجاد حساب  
+    ایجاد حساب     
 </div>
-  <div class="justify-content-between align-items-center  d-flex " dir="rtl">
-   <div>
-    <label for="exampleInputEmail1" class="form-label  "> نام</label>
-    <input type="text" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp">
-   </div>
-  <div>
-    <label for="exampleInputEmail1" class="form-label  "> نام خانوادگی</label>
-    <input type="text" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp">
-  </div>
+  <div dir="rtl">
+    <label class="form-label  ">آدرس ایمیل</label>
+    <input type="email" class="form-control " v-model="store.signUpEmail">
   </div>
   <div class="mb-3" dir="rtl">
-    <label for="exampleInputPassword1" class="form-label ">ایمیل</label>
-    <input type="email" class="form-control" id="exampleInputPassword1">
+    <label  class="form-label ">پسورد</label>
+    <input type="password" class="form-control" v-model=" store.signUpPassword">
   </div>
   <div>
-    <label for="male">male</label>
-    <input class="mx-2" type="radio" id="male" name="gendre" >
-    <label for="female">female</label>
-    <input class="mx-2" type="radio" id="female" name="gendre" >
-  </div>
-  <div>
-    <button class="btn btn-primary w-100 fs-5 my-4"> ورود </button>
+    <button class="btn btn-primary w-100 fs-5 my-4"  @click="checkCreateForm"> ایجاد حساب </button>
   </div>
   <hr>
   <div class="w-100 d-flex flex-column justify-content-center align-items-end px-1 my-1">
     <a class="text-decoration-none " href="#"> قوانین و مقررات</a>
-    <a class="text-decoration-none " href="#"> ورود</a>
+    <router-link to="/Account/Login" class="text-decoration-none " > ورود</router-link>
   </div>
   
 </div>
+
+
 </template>
-<style scoped>
-.createForm{
+<script setup>
+import { storeToRefs } from 'pinia';
+import { watch } from 'vue';
+import {  useRouter } from 'vue-router';
+import { useStore } from '../../stores/counter';
+
+const store= useStore()
+const router= useRouter()
+const{ isSignedUp } = storeToRefs(store)
+
+
+
+
+
+
+
+function checkCreateForm(){
+ console.log('checkCreateForm');
+
+  if (store.signUpEmail == '' ||  store.signUpPassword == '' ) {
+    store.alert('فیلد ها خالی میباشد' , 'alert-warning')
+  }else if ( store.signUpPassword.length < 8){
+    store.alert( 'پسورد حداقل باید 8 کاراکتر باشد','alert-warning' )
+
+  }else if(!store.signUpEmail.includes('@')){
+    store.alert( "ایمیل معتبر نیست",'alert-warning')
+  }else{
+
+    store.signUp()
+    console.log('signUp');
     
+
+  }
+
+}
+watch(isSignedUp, () => {
+  
+
+  if (store.isSignedUp == true){
+    router.push('/Account/Profile')
+    
+
+  }
+
+})
+
+
+</script>
+<style scoped lang="scss">
+.createForm{
+  animation: create 1.2s;
+
   width: 30rem;
   height: 40rem;
   margin: 3rem auto;
-  
+  background-color: rgb(255, 255, 255);
+  padding: 3rem;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 1px rgb(116, 116, 116);
+ 
 
+  div{
+    margin-top: 2rem;
+  }
+}
+@keyframes create {
+  0%{opacity: 0.1;
+    transform: rotateY(90deg)
+  
+  };
+  100%{opacity: 1;
+    transform: rotateY(0deg) };
 }
 </style>

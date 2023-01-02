@@ -16,39 +16,80 @@
         <div class="d-flex my-4 justify-content-around">
             <div >
                 <label for="name">نام</label>
-            <input class="form-control" type="text">
+            <input :placeholder="store.profileInfo.name" v-model="profileInfo.name" class="form-control" type="text" >
             </div>
             <div>
                 <label for="name">نام خانوادگی</label>
-            <input class="form-control" type="text">
+            <input :placeholder="store.profileInfo.lastName" v-model="profileInfo.lastName" class="form-control" type="text">
             </div>
         </div>
         <div class="d-flex my-4 justify-content-around">
             <div >
                 <label for="name">استان</label>
-            <input class="form-control" type="text">
+            <input :placeholder="store.profileInfo.State" v-model="profileInfo.State" class="form-control" type="text">
             </div>
             <div>
                 <label for="name">شهر </label>
-            <input class="form-control" type="text">
+            <input :placeholder="store.profileInfo.city" v-model="profileInfo.city" class="form-control" type="text">
             </div>
         </div>
         <div class="d-flex my-4 justify-content-around">
             <div >
                 <label for="name">کد پستی</label>
-            <input class="form-control" type="text">
+            <input :placeholder="store.profileInfo.postCode" v-model="profileInfo.postCode" class="form-control" type="text">
             </div>
             <div>
                 <label for="name">شماره تلفن </label>
-            <input class="form-control" type="number">
+            <input :placeholder="store.profileInfo.phone" v-model="profileInfo.phone" class="form-control" type="number">
             </div>
         </div>
         <div>
-            <button class="btn btn-primary mx-3">بروز رسانی</button>
+            <button class="btn btn-primary mx-3" @click="UpdateProfileInfo">بروز رسانی</button>
+            <button class="btn btn-danger mx-3" @click="LogOutAccount"> خروج از حساب کاربری</button>
         </div>
 
     </div>
+    
 </template>
+<script setup>
+import {  useRouter } from 'vue-router';
+import { useStore } from '../../stores/counter';
+import { storeToRefs } from 'pinia';
+import {watch , reactive} from 'vue'
+const store= useStore()
+const router= useRouter()
+const{ isSignedUp } = storeToRefs(store)
+let profileInfo = reactive({
+    name:'',
+    lastName:'',
+    State:'',
+    city:'',
+    postCode:'',
+    phone: '',
+})
+
+function LogOutAccount(){
+    store.signOut()
+   
+
+}
+watch(isSignedUp, () => {
+  
+
+  if (store.isSignedUp !== true){
+    router.push('/Account/Login')
+    
+
+  }
+
+})
+
+function UpdateProfileInfo(){
+    store.profileInfo = profileInfo
+}
+
+
+</script>
 
 <style scoped lang="scss">
 .profileForm{

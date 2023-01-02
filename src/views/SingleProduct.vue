@@ -1,22 +1,22 @@
 <template>
     <div class="row mt-5">
         <div class="col-6 d-flex align-items-start p-2 justify-content-center">
-            <img class="w-75 " src="../asserts/images/p1.png" alt="" srcset="">
+            <img class="w-75 " :src="store.singleProduct.img"  alt="" srcset="">
         </div>
         <div class="col-6 p-5">
             <div class="title fs-3">
-                <p>Title</p>
+                <p>{{store.singleProduct.title}}</p>
                 
             </div>
             <div class="d-flex align-items-center  p-2 justify-content-center">
                 
-                <vue3-star-ratings  v-model="rating" />
+                <vue3-star-ratings style="z-index: -1;" v-model="rating" />
                 <p class="m-2">132reviews</p>
                 <p class="m-2">150 سفارش</p>
                 
             </div>
             <div class="fs-3">
-                <p>815000 T</p>
+                <p> {{store.singleProduct.price}}</p>
                 
             </div>
             <div class="text-muted">
@@ -46,11 +46,11 @@
             </div>
             <div class="d-flex align-items-center flex-column p-2 justify-content-center">
                 <div class="d-flex align-items-center p-2 justify-content-between w-100">
-                    <p>Odsy-1000</p>
+                    <p>{{store.singleProduct.title}}</p>
                     <p class="text-muted fs-4">نام مدل</p>
                 </div>
                 <div class="d-flex align-items-center p-2 justify-content-between w-100">
-                    <p>قهوه ای</p>
+                    <p>{{store.singleProduct.color}}</p>
                     <p class="text-muted fs-4">رنگ</p>
                 </div>
                 <div class="d-flex align-items-center p-2 justify-content-between w-100">
@@ -68,16 +68,17 @@
             </div>
             <div class="d-flex align-items-center p-2 ">
                 <p class="mt-4">انتخاب سایز</p>
-                <label class="mx-3" for="radio">40</label>
-                <input type="radio" name="radio" >
-                <label class="mx-3" for="radio">41</label>
-                <input type="radio" name="radio" >
-                <label class="mx-3" for="radio">42</label>
-                <input type="radio" name="radio" >
+                
+                <div v-for="i in 3" >
+                    <label class="mx-3" for="radio">{{store.singleProduct.sizes[i]}}</label>
+                    <input type="radio" name="radio" >
+                </div>
+
+            
             </div>
             <div>
                 <button class="btn btn-primary ">خرید</button>
-                <button class="btn btn-outline-primary m-2">اضافه کردن به  سبد خرید</button>
+                <button @click="addToCartBtn" class="btn btn-outline-primary m-2">اضافه کردن به  سبد خرید</button>
             </div>
             
         </div>
@@ -86,28 +87,12 @@
     
 </template>
 <script setup>
-//     import db from '../firebase/firebase'
-//     import {collection , getDocs } from 'firebase/firestore'
-    import {ref} from 'vue'
+ import {ref} from 'vue';
+ import {useStore} from '@/stores/counter';
+ const store = useStore()
+
+
     
-
-
-//     const colRef = collection(db , "blog")
-//     let products=ref({})
-//    getDocs(colRef)
-//     .then(snapshot => {
-      
-//         snapshot.docs.map((e)=>{
-//             console.log(e.data());
-//           products.value = {...e.data()}
-//           console.log(products);
-          
-//         })
-       
-//     })
-//     .catch(err => {
-//         console.log(err.massage)
-//     })
 let numberOfProduct = ref(1)
 
  function increase(x){
@@ -120,6 +105,13 @@ let numberOfProduct = ref(1)
         numberOfProduct.value--
     }
  }
+ function addToCartBtn(){
+    console.log('aa');
+    store.addedToCart.push(store.singleProduct)
+    console.log(store.addedToCart);
+
+     
+}
 </script>
 <style lang="scss" scoped>
 .Qnt{
