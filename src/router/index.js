@@ -25,10 +25,8 @@ const router = createRouter({
     {
       path:"/Account" , component:Account ,
         beforeEnter: (()=>{
-     
         const store = useStore()
         store.ProfileTab=true
-        
       }) ,
       children:[
         {path:'Login',component:()=>import('../components/Acc/LoginAccount.vue')},

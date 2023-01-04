@@ -1,8 +1,5 @@
 <template>
 
-
-
-
 <div class="loginForm " >
   <div class="fs-4 text-center">
       ورود   
@@ -37,18 +34,13 @@ import { watch } from 'vue';
 const store = useStore()
 const router = useRouter()
 const{ isSignedUp } = storeToRefs(store)
+
 watch(isSignedUp, () => {
-  
-
-  if (store.isSignedUp == true){
+   if (store.isSignedUp == true){
     router.push('/Account/Profile')
-    
-
-  }
+     }
 
 })
-
-
 
 onBeforeMount(() => {
   if (store.isSignedUp) {

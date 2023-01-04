@@ -26,19 +26,13 @@
 </template>
 <script setup>
 import { storeToRefs } from 'pinia';
-import { watch } from 'vue';
+import { watch  } from 'vue';
 import {  useRouter } from 'vue-router';
 import { useStore } from '../../stores/counter';
 
 const store= useStore()
 const router= useRouter()
 const{ isSignedUp } = storeToRefs(store)
-
-
-
-
-
-
 
 function checkCreateForm(){
  console.log('checkCreateForm');
@@ -51,7 +45,7 @@ function checkCreateForm(){
   }else if(!store.signUpEmail.includes('@')){
     store.alert( "ایمیل معتبر نیست",'alert-warning')
   }else{
-
+    
     store.signUp()
     console.log('signUp');
     
@@ -59,16 +53,14 @@ function checkCreateForm(){
   }
 
 }
+
 watch(isSignedUp, () => {
-  
-
-  if (store.isSignedUp == true){
-    router.push('/Account/Profile')
-    
-
-  }
+   if (store.isSignedUp == true){
+    router.push('/Account/Profile') }
 
 })
+
+
 
 
 </script>

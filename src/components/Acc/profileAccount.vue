@@ -4,12 +4,12 @@
             پروفایل
         </div>
         <div class="profilePic p-4">
-            <img src="../../asserts/images/p8.png" alt="">
-            <label for="input">
+            <img :src="store.urlImage" alt="">
+            <label for="input" @change="UploadImage">
                 <p class="btn btn-outline-secondary mt-3">آپلود عکس</p>
                 <input accept="image/*" id="input" type="file" >
             </label>
-            <button class="btn btn-outline-secondary mx-2">
+            <button class="btn btn-outline-secondary mx-2" @click="store.deletImage">
                 حذف
             </button>
         </div>
@@ -66,28 +66,35 @@ let profileInfo = reactive({
     city:'',
     postCode:'',
     phone: '',
+    id:store.signUpEmail
 })
 
 function LogOutAccount(){
     store.signOut()
-   
-
-}
-watch(isSignedUp, () => {
-  
+   }
+watch(isSignedUp , () => {
 
   if (store.isSignedUp !== true){
     router.push('/Account/Login')
-    
-
-  }
-
+    }
 })
 
 function UpdateProfileInfo(){
     store.profileInfo = profileInfo
+    store.UserInfoSet()
+    
 }
+// ----------------//////////////////-------------//
+function UploadImage(e){
+const file = e.target.files[0]
+console.log(file.name);
+store.profileImage = file.name
+store.file = file
+store.UploadImage()
+ 
 
+    // store.file = 
+}
 
 </script>
 
@@ -103,9 +110,9 @@ function UpdateProfileInfo(){
         
         img{
             border-radius: 50%;
-            width: 70px;
+            width:200px;
             margin-right: 19px;
-            height: 70px;
+            height:200px;
         }
         #input{
             display: none;

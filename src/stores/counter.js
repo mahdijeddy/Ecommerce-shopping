@@ -1,19 +1,16 @@
-import { ref, computed ,reactive} from 'vue'
 import { defineStore } from 'pinia'
 // ___________firebase________
-import {collection , getDocs } from 'firebase/firestore'
+import {collection , getDocs ,addDoc, setDoc ,doc } from 'firebase/firestore'
+import { getStorage , ref ,uploadBytes ,getDownloadURL ,deleteObject  } from "firebase/storage";
+import {db } from '../firebase/firebase'
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword, signOut,
-  onAuthStateChanged
 } from 'firebase/auth'
-import { getStorage } from "firebase/storage";
 
-import db from '../firebase/firebase'
 const auth = getAuth()
- 
-    
+const storage = getStorage();  
     
    
 
@@ -24,9 +21,9 @@ export const useStore = defineStore('store', {
 
     signUpEmail:'',
     signUpPassword:'',
+    data:[],
     CartShow:false , 
     ProfileTab:false,
-    data:[],
     singleProduct:{},
     addedToCart:[],
     totalCartPrice:0,
@@ -34,94 +31,50 @@ export const useStore = defineStore('store', {
     isAuthenticated:false,
     hasAccount:true,
     isSignedUp:false,
-     profileInfo :{},
-
+    profileInfo :{},
+    profileImage:'',
+    file:'',
+    loading:false,
+    urlImage:'/src/asserts/images/11.jpg',
+    
     state : false,
     Products:{
       Drops:{
         Price1:false,
         Size1:false,
       },
-     mostPopuler:{
-      P1:{
-        imgSrc:"src/asserts/images/p1.png",
-        title: "کاپشن درجه یک باگستون",
-        price: "2,150,000, T",
-
-      },
-      P2:{
-        imgSrc:"src/asserts/images/p2.png",
-        title: "کیف لبتاپ مدل 234",
-        price: "3,400,000 T",
-
-      },
-      P3:{
-        imgSrc:"src/asserts/images/p3.png",
-        title: "پیراهن ساده مردانه",
-        price: "260,000 T",
-
-      },
-      P4:{
-        imgSrc:"src/asserts/images/p4.png",
-        title: "yt23 nike شلوارک  ",
-        price: "800,000 T",
-
-      },
-     },
-      newArrived:{
-        P5:{
-          imgSrc:"src/asserts/images/p5.png",
-          title: "mini SD 256Gb",
-          price: "400,000 T",
-  
-        },
-        P6:{
-          imgSrc:"src/asserts/images/p6.png",
-          title: "تک مبل راحتی",
-          price: "1,9500,000 T",
-  
-        },
-        P7:{
-          imgSrc:"src/asserts/images/p7.png",
-          title: "هدست ",
-          price: "900,000 T",
-  
-        },
-        P8:{
-          imgSrc:"src/asserts/images/p8.png",
-          title: "ساعت هوشمند",
-          price: "8,000,000 T",
-  
+      mostSale:{
+      state:false,
+      products:{
+        p1:{
+          title:'product1 it isnt loaded',
+          price:'240000T',
+          img:"https://i.postimg.cc/pdyC3SsP/7.jpg",
+          detail:"lorem ipsum"
         }
       }
     },
-   }),
+    new:{
+      state:false , 
+      products:{
+        p1:{
+          title:'product1 it isnt loaded',
+          price:'240000T',
+          img:"https://i.postimg.cc/pdyC3SsP/7.jpg",
+          detail:"lorem ipsum"
+        },
+        p2:{
+          title:'product1 it isnt loaded',
+          price:'240000T',
+          img:"https://i.postimg.cc/MTV7SJVJ/p1.png",
+          detail:"lorem ipsum"
+        },
+      }
+    }
+    }}),
  
   actions: {
-      getData(){
-      
-    const colRef = collection(db , "products")
-        // ---------------------fetching data from firebase 
-      getDocs(colRef)
-          .then( snapshot => {
-              
-            snapshot.docs.forEach(e => {
-              console.log(e.data());
-              
-                        this.data.push({...e.data() })
-                       
-                        
-                       
-             
-            });
-              
-
-          })
-          .catch(err => {
-              console.log(err.massage)
-          })
-    },
-
+    
     // -----------------alert function on website 
    alert(msg , cls){
     const div = document.createElement('div')
@@ -133,20 +86,43 @@ export const useStore = defineStore('store', {
     document.body.appendChild(div)
     setTimeout(() => {
       div.remove()
-    }, 1000);
+    }, 2000);
  
   },
+      getData(){
+        this.loading = true
+    const colRef = collection(db , "products")
+        // ---------------------fetching data from firebase 
+      getDocs(colRef)
+          .then( snapshot => {
+              
+            snapshot.docs.forEach(e => {
+              console.log(e.data());
+              this.data.push({...e.data() })
+                       
+              this.loading = false
+          });
+
+          })
+          .catch(err => {
+              this.alert(err.message , 'alert-danger')
+              this.loading = false
+          })
+    },
+
   // ----------------create account on firebase-----------
 
  signUp(){
-  
-  createUserWithEmailAndPassword(auth, this.signUpEmail, this.signUpPassword)
+   this.loading = true ; 
+      createUserWithEmailAndPassword(auth, this.signUpEmail, this.signUpPassword)
     .then(e => {
       console.log('user created:', e.user)
       this.alert(' ایجاد حساب موفقیت امیز ' , 'alert-success')
       this.isSignedUp = true
+      this.loading = false
     })
     .catch(err => {
+      this.loading = false
       console.log(err.message)
       if (err.message == 'Firebase: Error (auth/email-already-in-use).') {
         this.alert(' ایمیل از قبل وجود دارد ' , 'alert-danger')
@@ -161,32 +137,153 @@ export const useStore = defineStore('store', {
 
 // -------------------------signOut 
 signOut(){
+  this.loading = true
   signOut(auth)
     .then(() => {
       console.log('user signed out')
       this.alert(' خروج موفقیت امیز ' , 'alert-success')
       this.isSignedUp = false
+     
+      this.loading = false
     })
     .catch(err => {
+      this.loading = false
+
       this.alert('خطایی رخ داده است' , 'alert-danger')
     })
-},
-// --------------------------signIn 
+},// --------------------------signIn 
 signIn(){
+  this.loading = true
+
   signInWithEmailAndPassword(auth, this.signUpEmail, this.signUpPassword)
 .then(e => {
   this.alert(' ورود موفقیت امیز ' , 'alert-success')
   this.isSignedUp = true
+  this.UserInfoDownload()
+
+
+  getDownloadURL(ref(storage, 'images/'+this.profileInfo.img))
+  .then((url) => {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+    this.urlImage = url
+    this.loading = false
+  })
+  .catch((error) => {
+   console.log(error.message);
+   this.loading = false
+  });
 })
 .catch(err => {
-  this.alert('خطایی رخ داده است' , 'alert-danger')
+  this.alert(err.message , 'alert-danger')
+  this.loading = false
 })
 },
+
 // ------------------------------storage 
 
-Storage(){
-  const storage = getStorage(firebaseApp, "gs://my-custom-bucket");
-}
+downloadImage(){
+  this.loading = true
+  getDownloadURL(ref(storage, 'images/'+this.file.name))
+  .then((url) => {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+    this.urlImage = url
+    this.loading = false
+  })
+  .catch((error) => {
+   console.log(error.message);
+   this.loading = false
+  });
+},
+UploadImage(){
+  
+  const storageRef = ref(storage , 'images/'+this.file.name);
+  uploadBytes(storageRef,this.file ).then((e) => {
+    console.log('Uploaded a blob or file!');
+    this.downloadImage()
+  });
+
+},
+deletImage(){
+  deleteObject(ref(storage , 'images/'+this.file.name)).then(() => {
+   console.log('deleted');
+   this.urlImage = ''
+  }).catch((error) => {
+    console.log(error.message);
+  });
+},
+// --------------------------------------userInfo -----------
+UserInfoDownload(){
+  
+  const colRefUser = collection(db, "users")
+  
+
+  this.loading = true
+  getDocs(colRefUser)
+.then(e => {
+  let ee;
+ 
+    e.docs.forEach(doc=>{
+     
+      ee = doc.data()
+    })
+    console.log(ee);
+    if (ee.id == this.signUpEmail) {
+    this.profileInfo = ee
+      
+    }
+     this.urlImage = this.profileInfo.img
+    this.alert('updated' )
+    this.loading = false
+})
+.catch(err => {
+    console.log(err.massage)
+    this.alert('Error','alert-danger' )
+    this.loading = false
+})
+},
+
+UserInfoUpload(){
+  this.loading = true
+  this.profileInfo.img = this.profileImage
+  const colRefUser = collection(db, 'user')
+  addDoc(colRefUser, this.profileInfo)
+  .then(() => {
+    this.alert('updated' , 'alert-success')
+    this.UserInfoDownload()
+    this.loading = false
+  })
+},
+
+
+UserInfoDelet(){
+  const colRefUser = collection(db, 'user')
+  deleteDoc(colRefUser)
+    .then(() => {
+     this.alert('deleted' , 'alert-danger')
+    })
+
+},
+UserInfoSet(){
+   setDoc(doc(db, "users", this.signUpEmail),this.profileInfo)
+   .then(() => {
+    this.alert('updated' , 'alert-success')
+    this.UserInfoDownload()
+    this.loading = false
+  })
+},
+
 
 ///////////////////////////////////////
 //////////////////////////////////////

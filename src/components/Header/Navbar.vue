@@ -3,10 +3,10 @@
      <div class="HeaderNav">
         <div @click="CatState = !CatState"><a href="#">دسته بندی کالاها</a>
         </div>
-        <div><a href="#" @click="GoTo(800)">پرفروشترین ها </a></div>
-        <div><a href="#">تخفیفها و پیشنهادها </a></div>
-        <div><a href="#">شگفت انگیز ها  </a></div>
-        <div><a href="#"> سایر  </a></div>
+        <div><a href="#"  @click="GoTo(800) , store.Products.mostSale.state =  !store.Products.mostSale.state ">پرفروشترین ها </a></div>
+        <div><a href="#" @click="GoTo(1200) , store.Products.new.state =  !store.Products.new.state">تخفیفها و پیشنهادها </a></div>
+        <div><a href="#" >شگفت انگیز ها  </a></div>
+        <div><a href="#" > سایر  </a></div>
 
     </div>
         <!-- -------------------------category----options------ -->
@@ -20,12 +20,12 @@
          
             <div class="subMenues">
                 <div v-if="subMenu">
-                    <div><a href="#">لباس مردانه</a></div>
-                    <div><a href="#">کفش مردانه</a></div>
-                    <div><a href="#">ساعت مردانه</a></div>
-                    <div><a href="#">کیف مردانه</a></div>
-                    <div><a href="#">کمربند مردانه</a></div>
-                    <div><a href="#">عینک مردانه</a></div>
+                    <div><router-link to="/products" href="#">لباس مردانه</router-link></div>
+                    <div><router-link to="/products" href="#">کفش مردانه</router-link></div>
+                    <div><router-link to="/products" href="#">ساعت مردانه</router-link></div>
+                    <div><router-link to="/products" href="#">کیف مردانه</router-link></div>
+                    <div><router-link to="/products" href="#">کمربند مردانه</router-link></div>
+                    <div><router-link to="/products" href="#">عینک مردانه</router-link></div>
                 </div>
                 <div v-if="subMenu2">
                     <div><a href="#">لباس زنانه</a></div>
@@ -51,6 +51,8 @@
 </template>
 <script setup>
 import {ref} from 'vue'
+import { useStore } from '../../stores/counter';
+const store = useStore()
 let CatState = ref(false)
 let subMenu = ref(false)
 let subMenu2 = ref(false)
@@ -63,7 +65,9 @@ window.addEventListener('mouseup', function(e) {
 
 function GoTo(x){
     scrollTo( 0 , x)
+
 }
+
 
 
 </script>
